@@ -29,7 +29,8 @@ app.listen((5400), () => {
 })
 
 //create connection to connect to mongoDb:
-let db = mongoose.connect('mongodb://localhost:27017/FidiTSK',{});
+// let db = mongoose.connect('mongodb://localhost:27017/FidiTSK',{});
+let db = mongoose.connect('mongodb+srv://Raju:<QRB54JCWfv8D7QCw>@cluster0.xevqu.mongodb.net/fidisysTSK?retryWrites=true&w=majority',{});
 
 
  db = mongoose.connection;
