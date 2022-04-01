@@ -23,8 +23,9 @@ app.use(bodyParser.urlencoded(
 
 require('./routes/routes')(app);
 
+const PORT=process.env.PORT || 5400;
 
-app.listen((5400), () => {
+app.listen((PORT), () => {
     console.log("Listening on port 5400")
 })
 
