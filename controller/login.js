@@ -17,17 +17,25 @@ module.exports = {
             .notEmpty()
             .withMessage('password is not provide')
             .run(req)
+            
+            
+try{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).send(errors);
+    const { email, password } = req.body;
+    const user = await User.findOne({ email })
+    if (!user) return res.status(401).send('Invalid email or password')
+    const isAuthUser = await User.passwordCompare(password, user.password)
+    if (!isAuthUser) return res.status(401).send('Invalid email or password')
+    const token = await user.generateAuthToken()
+    res.send({ user: user , token:  token})
 
+}
+catch(err){
+    res.status(500).send({message: err.message})
+}
 
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) return res.status(400).send(errors);
-        const { email, password } = req.body;
-        const user = await User.findOne({ email })
-        if (!user) return res.status(401).send('Invalid email or password')
-        const isAuthUser = await User.passwordCompare(password, user.password)
-        if (!isAuthUser) return res.status(401).send('Invalid email or password')
-        const token = await user.generateAuthToken()
-        res.send({ user: user , token:  token})
+     
     },
     // async userLogout(req, res) {
     //     let sess = req.user;
