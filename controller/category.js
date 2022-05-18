@@ -60,13 +60,13 @@ module.exports = {
             res.status(400).send({message: error.message})
         }
     },
-    async deleteCategories(req, res) {
-        try {
-            const id = req.params.id;
-            const categoryData = await Category.findByIdAndDelete(id)
-            res.send(categoryData)
-        } catch (error) {
-            res.status(400).send({message: error.message})
-        }
-    }
+    // async deleteCategories(req, res) {
+    //     try {
+    //         const id = req.params.id;
+    //         const categoryData = await Category.findByIdAndDelete(id)
+    //         res.send(categoryData)
+    //     } catch (error) {
+    //         res.status(400).send({message: error.message})
+    //     }
+    // }
 }
